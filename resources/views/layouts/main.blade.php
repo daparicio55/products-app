@@ -41,14 +41,28 @@
             <!-- Divider -->            
             <x-sidebar-divider class="my-0"/>
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+            <x-nav-item route="dashboard" icon="fas fa-fw fa-tachometer-alt" label="Dashboard"/>
 
             <!-- Divider -->
             <x-sidebar-divider/>
+
+            <!-- Heading -->
+            <x-sidebar-heading label="Administrar Catálogos"/>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <x-nav-item-collapsive name="collapseTwo" icon="fas fa-fw fa-cog" label="Catálogos">
+                <a class="collapse-item" href="{{ route('dashboard.medidas.index') }}">
+                    Medidas
+                </a>
+                <a class="collapse-item" href="{{ route('dashboard.categorias.index') }}">
+                    Categorias
+                </a>
+                <a class="collapse-item" href="{{ route('dashboard.catalogos.index') }}">
+                    Catálogos
+                </a>
+            </x-nav-item-collapsive>
+
+
 
             <!-- Heading -->
             <x-sidebar-heading label="Interface"/>
