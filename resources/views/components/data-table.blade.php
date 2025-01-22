@@ -17,7 +17,12 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#{{ $id }}').DataTable();
+            $('#{{ $id }}').DataTable({
+                aaSorting: [],
+                language: {
+                    url: "{{ asset('vendor/datatables/spanish.json') }}",
+                },
+            });
         });
     </script>
 @endpush

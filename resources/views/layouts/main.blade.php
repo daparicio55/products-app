@@ -20,6 +20,8 @@
     <!-- Custom styles for this template-->    
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2-bootstrap4.min.css') }}">
 </head>
 
 <body id="page-top">
@@ -451,6 +453,15 @@
     {{-- <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script> --}}
 
+    {{-- select 2 js --}}
+    <script src="{{ asset('js/select2.full.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#frm').on('submit', function() {
+                $(this).find(':submit').prop('disabled', true);
+            });
+        });
+    </script>
     @stack('scripts')
 </body>
 
