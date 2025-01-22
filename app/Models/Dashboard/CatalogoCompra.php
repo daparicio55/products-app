@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Dashboard;
 
-use App\Models\Dashboard\Catalogo;
-use App\Models\Dashboard\Compra;
 use Illuminate\Database\Eloquent\Model;
 
 class CatalogoCompra extends Model

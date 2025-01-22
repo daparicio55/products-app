@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Medida extends Model
 {
     //
-    protected $fillable = ['nombre'];
+    protected $fillable = [
+        'nombre',
+        'codigo'
+    ];
 }

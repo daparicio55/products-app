@@ -19,9 +19,10 @@ class MedidaController extends Controller
     public function store(Request $request){
         $request->validate([
             'nombre'=>'required|unique:medidas,nombre',
+            'codigo'=>'required'
         ]);
         Medida::create($request->all());
-        return redirect()->route('medidas.index');
+        return redirect()->route('dashboard.medidas.index');
     }
     public function edit(Medida $medida){
         $medida = Medida::find($medida->id);
@@ -30,14 +31,15 @@ class MedidaController extends Controller
     public function update(Request $request, Medida $medida){
         $request->validate([
             'nombre'=>'required|unique:medidas,nombre,'.$medida->id,
+            'codigo'=>'required'
         ]);
         $medida = Medida::find($medida->id);
         $medida->update($request->all());
-        return redirect()->route('medidas.index');
+        return redirect()->route('dashboard.medidas.index');
     }
     public function destroy(Medida $medida){
         $medida = Medida::find($medida->id);
         $medida->delete();
-        return redirect()->route('medidas.index');
+        return redirect()->route('dashboard.medidas.index');
     }
 }
