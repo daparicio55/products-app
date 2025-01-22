@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\CategoriaController;
 use App\Http\Controllers\Dashboard\ClienteController;
 use App\Http\Controllers\Dashboard\CompraController;
 use App\Http\Controllers\Dashboard\CompraReporteController;
+use App\Http\Controllers\Dashboard\MarcaController;
 use App\Http\Controllers\Dashboard\MedidaController;
 use App\Http\Controllers\Dashboard\MetodoPagoController;
 use App\Http\Controllers\Dashboard\ProveedoreController;
@@ -24,6 +25,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('index');
     })->name('dashboard');
+    // rutas para las marcas
+    Route::resource('/dashboard/marcas', MarcaController::class)->names('dashboard.marcas')
+    ->except('show');
     /* rutas para las medidas */
     Route::resource('/dashboard/medidas', MedidaController::class)->names('dashboard.medidas')
     ->except('show');

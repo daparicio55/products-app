@@ -51,15 +51,20 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <x-nav-item-collapsive name="collapseTwo" icon="fas fa-list" label="Catálogos">
+                
                 <a class="collapse-item" href="{{ route('dashboard.medidas.index') }}">
                     <i class="fas fa-ruler-vertical mr-2"></i>Medidas
                 </a>
                 <a class="collapse-item" href="{{ route('dashboard.categorias.index') }}">
-                    <i class="fas fa-sitemap mr-2"></i> Categorias
+                    <i class="fas fa-sitemap mr-2"></i>Categorias
+                </a>
+                <a class="collapse-item" href="{{ route('dashboard.marcas.index') }}">
+                    <i class="fas fa-copyright mr-2"></i>Marcas
                 </a>
                 <a class="collapse-item" href="{{ route('dashboard.catalogos.index') }}">
-                    <i class="fas fa-truck-loading mr-2"></i> Catálogos
+                    <i class="fas fa-truck-loading mr-2"></i>Catálogos
                 </a>
+                
             </x-nav-item-collapsive>
 
 

@@ -21,7 +21,7 @@ class CategoriaController extends Controller
             'nombre'=>'required|unique:categorias,nombre'
         ]);
         Categoria::create($request->all());
-        return redirect()->route('categorias.index');
+        return redirect()->route('dashboard.categorias.index');
     }
     public function edit(Categoria $categoria){
         return view('dashboard.categorias.edit',compact('categoria'));
@@ -31,10 +31,10 @@ class CategoriaController extends Controller
             'nombre'=>'required|unique:categorias,nombre,'.$categoria->id
         ]);
         $categoria->update($request->all());
-        return redirect()->route('categorias.index');
+        return redirect()->route('dashboard.categorias.index');
     }
     public function destroy(Categoria $categoria){
         $categoria->delete();
-        return redirect()->route('categorias.index');
+        return redirect()->route('dashboard.categorias.index');
     }
 }

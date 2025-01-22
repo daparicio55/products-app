@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('content')
     <!-- Page Heading -->
-    <x-text-header label="Categorias"/>
-    <x-btn-add-back route="dashboard.categorias.index" type="back"/>  
-    <form action="{{ route('dashboard.categorias.update',$categoria->id) }}" method="POST">
+    <x-text-header label="Marcas"/>
+    <x-btn-add-back route="dashboard.marcas.index" type="back"/>  
+    <form action="{{ route('dashboard.marcas.update',$marca->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="card shadow mb-4">
@@ -15,7 +15,7 @@
                 
                     <div class="row">
                         <div class="col-sm-12">
-                            <x-input-text label="Nombre" name="nombre" :value="$categoria->nombre"/>
+                            <x-input-text label="Nombre" name="nombre" :value="$marca->nombre"/>
                         </div>
                     </div>
             </div>
