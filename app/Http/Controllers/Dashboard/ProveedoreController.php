@@ -23,7 +23,7 @@ class ProveedoreController extends Controller
             'direccion' => 'required'
         ]);
         Proveedore::create($request->all());
-        return redirect()->route('proveedores.index');
+        return redirect()->route('dashboard.proveedores.index');
     }
     public function edit(Proveedore $proveedore){
         return view('dashboard.proveedores.edit', compact('proveedore'));
@@ -35,10 +35,10 @@ class ProveedoreController extends Controller
             'direccion' => 'required'
         ]);
         $proveedore->update($request->all());
-        return redirect()->route('proveedores.index');
+        return redirect()->route('dashboard.proveedores.index');
     }
     public function destroy(Proveedore $proveedore){
         $proveedore->delete();
-        return redirect()->route('proveedores.index');
+        return redirect()->route('dashboard.proveedores.index');
     }
 }
