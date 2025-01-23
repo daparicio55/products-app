@@ -36,12 +36,14 @@ Route::middleware([
     ->except('show');
     /* rutas para los catalogos */
     Route::resource('/dashboard/catalogos', CatalogoController::class)->names('dashboard.catalogos');
+
     /* rutas para los proveedores */
     Route::resource('/dashboard/proveedores', ProveedoreController::class)->names('dashboard.proveedores')
     ->except('show');
     /* rutas para las compras */
     Route::resource('/dashboard/compras', CompraController::class)->names('dashboard.compras')
     ->except('edit');
+    
     /* rutas para los metodos de pagos */
     Route::resource('/dashboard/metodospagos', MetodoPagoController::class)->names('dashboard.metodospagos')
     ->except('show');
