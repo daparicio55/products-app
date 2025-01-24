@@ -8,7 +8,6 @@ use App\Models\Dashboard\Catalogo;
 use App\Models\Dashboard\Compra;
 use App\Models\Dashboard\Proveedore;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class CompraController extends Controller
 {
@@ -25,8 +24,10 @@ class CompraController extends Controller
         $proveedores = Proveedore::all();
         return view('dashboard.compras.create', compact('catalogos', 'proveedores'));
     }
-    public function store(StoreCompraRequest $request)
+    /* public function store(StoreCompraRequest $request) */
+    public function store(Request $request)
     {
+        return $request;
         try {
             //guardamos la compra
             $compra = new Compra();
@@ -46,7 +47,7 @@ class CompraController extends Controller
             //throw $th;
             return $th->getMessage();
         }       
-        return redirect()->route('compras.index');
+        return redirect()->route('dashboard.compras.index');
     }
 
     public function show(Compra $compra)
@@ -58,7 +59,7 @@ class CompraController extends Controller
     {
         $compra = Compra::find($id);
         $compra->delete();
-        return redirect()->route('compras.index');
+        return redirect()->route('dashboard.compras.index');
     }
 
     public function setTotales($request,$compra){
