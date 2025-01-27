@@ -31,7 +31,7 @@
 
                     <div class="col-sm-12 col-md-4 mt-2 d-flex justify-content-center align-items-end">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="checkigv" name="checkigv">
+                            <input class="form-check-input" type="checkbox" id="checkigv" name="checkigv" checked>
                             <label class="form-check-label" for="gridCheck1">
                               Calcular IGV.
                             </label>

@@ -8,6 +8,7 @@ use App\Models\Dashboard\Catalogo;
 use App\Models\Dashboard\Compra;
 use App\Models\Dashboard\Proveedore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
@@ -27,8 +28,8 @@ class CompraController extends Controller
     /* public function store(StoreCompraRequest $request) */
     public function store(Request $request)
     {
-        return $request;
         try {
+            DB::beginTransaction();
             //guardamos la compra
             $compra = new Compra();
             $compra->fecha = $request->fecha;
@@ -42,9 +43,11 @@ class CompraController extends Controller
 
             //actualizamos los totales 
             $this->setTotales($request,$compra);
-            
+                        
+            DB::commit();
         } catch (\Throwable $th) {
             //throw $th;
+            DB::rollBack();
             return $th->getMessage();
         }       
         return redirect()->route('dashboard.compras.index');
@@ -52,7 +55,10 @@ class CompraController extends Controller
 
     public function show(Compra $compra)
     {
-        return view('dashboard.compras.show',compact('compra'));
+        $catalogos = Catalogo::orderBy('nombre','asc')
+        ->get();
+        $proveedores = Proveedore::all();
+        return view('dashboard.compras.show',compact('compra','proveedores','catalogos'));
     }
 
     public function destroy($id)
@@ -67,6 +73,7 @@ class CompraController extends Controller
         $compra->subtotal = $totales['subtotal'];
         $compra->total = $totales['total'];
         $compra->igv = $totales['igv'];
+        $compra->igv_status = isset($request->checkigv) ? 1 : 0;
         $compra->update();
     }
 
@@ -77,7 +84,7 @@ class CompraController extends Controller
         for ($i=0; $i < count($request->catalogos); $i++) { 
             $subtotal += $request->cantidades[$i] * $request->precios[$i];
         }
-        if(isset($request->igv_status)){
+        if(isset($request->checkigv)){
             $igv = $subtotal * 0.18;
         }
         $total = $subtotal + $igv;

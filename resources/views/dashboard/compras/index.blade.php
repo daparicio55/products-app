@@ -27,6 +27,7 @@
                             <td>{{ date('d-m-Y', strtotime($compra->fecha)) }}</td>
                             <td>{{ $compra->total }}</td>
                             <td>
+                                <x-btn-show route="dashboard.compras.show" :id="$compra->id" />
                                 <x-btn-edit route="dashboard.compras.show" :id="$compra->id" />
                                 <x-modal-delete route="dashboard.compras.destroy" title="Confirmar Eliminacion"
                                     :id="$compra->id">

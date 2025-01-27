@@ -1,6 +1,6 @@
-@props(['name','label','value'=>''])
+@props(['name','label','value'=>'','disabled'=>'false'])
 <label for="{{ $name }}">{{ $label }}</label>
-<select name="{{ $name }}" id="{{ $name }}" class="form-control">
+<select name="{{ $name }}" id="{{ $name }}" class="form-control" @if($disabled == 'true') disabled @endif>
     <option value="" selected disabled>Seleccione una opcion</option>
     {{ $slot }}
 </select>

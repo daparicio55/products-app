@@ -68,6 +68,9 @@
             $('#catalogos').select2({
                 theme: 'bootstrap4',
             });
+            $('#checkigv').change(function(){
+                calcularIgv();
+            });
             //cuando hacemos click en el boton agregar
             $('#add-producto').click(function() {
                 //obtenemos los valores de los inputs
@@ -85,6 +88,7 @@
                         let cantidad_nueva = parseInt(cantidad_actual) + parseInt(cantidad);
                         $row.find('td').eq(0).text(cantidad_nueva);
                         $row.find('td').eq(3).text((precio * cantidad_nueva).toFixed(2));
+                        $row.find('input').eq(0).val(cantidad_nueva);
                     }else{                   
                         $('#detalles').append(`
                         <tr class="text-center" id="row${catalogo_id}">
@@ -93,9 +97,9 @@
                             <td>${precio}</td>
                             <td>${(precio * cantidad).toFixed(2)}</td>
                             <td>
-                                <input type="text" id="cantidad${catalogo_id}" name="cantidad[]" value="${cantidad}">
-                                <input type="text" id="catalogo${catalogo_id}" name="catalogo_id[]" value="${catalogo_id}">
-                                <input type="text" id="precio${catalogo_id}" name="precio[]" value="${precio}">
+                                <input type="hidden" id="cantidad${catalogo_id}" name="cantidades[]" value="${cantidad}">
+                                <input type="hidden" id="catalogo${catalogo_id}" name="catalogos[]" value="${catalogo_id}">
+                                <input type="hidden" id="precio${catalogo_id}" name="precios[]" value="${precio}">
                                 <button type="button" class="btn btn-danger btn-sm" onclick="rowdelete(${catalogo_id})">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -130,6 +134,22 @@
             $('#subtotal').text(subtotal.toFixed(2));
             $('#igv').text(igv.toFixed(2));
             $('#total').text(total.toFixed(2));
+        }
+        function calcularIgv(){
+            let checkigv = $('#checkigv').is(':checked');
+            if (checkigv) {
+                let subtotal = parseFloat($('#subtotal').text());
+                let igv = subtotal * 0.18;
+                let total = subtotal + igv;
+                $('#igv').text(igv.toFixed(2));
+                $('#total').text(total.toFixed(2));
+            }else{
+                let subtotal = parseFloat($('#subtotal').text());
+                let igv = 0;
+                let total = subtotal + igv;
+                $('#igv').text(igv.toFixed(2));
+                $('#total').text(total.toFixed(2));
+            }
         }
     </script>
 @endpush
