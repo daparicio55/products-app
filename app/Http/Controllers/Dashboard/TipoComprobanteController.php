@@ -21,7 +21,7 @@ class TipoComprobanteController extends Controller
             'nombre' => 'required|string|max:255',
         ]);
         TipoComprobante::create(request()->all());
-        return redirect()->route('tiposcomprobantes.index'); 
+        return redirect()->route('dashboard.tiposcomprobantes.index'); 
     }
     public function edit($id){
         $tipocomprobante = TipoComprobante::find($id);
@@ -33,11 +33,11 @@ class TipoComprobanteController extends Controller
         ]);
         $tipocomprobante = TipoComprobante::find($id);
         $tipocomprobante->update(request()->all());
-        return redirect()->route('tiposcomprobantes.index');
+        return redirect()->route('dashboard.tiposcomprobantes.index');
     }
     public function destroy($id){
         $tipocomprobante = TipoComprobante::find($id);
         $tipocomprobante->delete();
-        return redirect()->route('tiposcomprobantes.index');
+        return redirect()->route('dashboard.tiposcomprobantes.index');
     }
 }

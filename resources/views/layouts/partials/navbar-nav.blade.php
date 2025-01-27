@@ -56,3 +56,25 @@
 
 <!-- Divider -->
 <x-sidebar-divider />
+
+<!-- Heading PARA VENTAS -->
+<x-sidebar-heading label="Administrar Ventas" />
+
+<x-nav-item-collapsive name="collapseFour" icon="fas fa-shopping-cart" label="Ventas">
+
+    <a class="collapse-item" href="{{ route('dashboard.metodospagos.index') }}">
+        <i class="fab fa-paypal mr-2"></i>Métodos de Pagos
+    </a>
+
+    <a class="collapse-item" href="{{ route('dashboard.tiposcomprobantes.index') }}">
+        <i class="fas fa-paste mr-2"></i>T. Comprobantes
+    </a>
+
+    <a class="collapse-item" href="{{ route('dashboard.clientes.index') }}">
+        <i class="fas fa-users mr-2"></i>Clientes
+    </a>
+
+    <a class="collapse-item" href="{{ route('dashboard.ventas.index') }}">
+        <i class="fas fa-shopping-cart mr-2"></i>Ventas
+    </a>
+</x-nav-item-collapsive>

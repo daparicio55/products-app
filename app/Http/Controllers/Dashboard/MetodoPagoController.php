@@ -21,7 +21,7 @@ class MetodoPagoController extends Controller
             'nombre' => 'required|string|max:255',
         ]);
         MetodoPago::create($request->all());
-        return redirect()->route('metodospagos.index');
+        return redirect()->route('dashboard.metodospagos.index');
     }
     public function edit($id){
         $metodopago = MetodoPago::find($id);     
@@ -33,11 +33,11 @@ class MetodoPagoController extends Controller
         ]);
         $metodopago = MetodoPago::find($id);
         $metodopago->update($request->all());
-        return redirect()->route('metodospagos.index');
+        return redirect()->route('dashboard.metodospagos.index');
     }
     public function destroy($id){
         $metodopago = MetodoPago::find($id);
         $metodopago->delete();
-        return redirect()->route('metodospagos.index');
+        return redirect()->route('dashboard.metodospagos.index');
     }
 }

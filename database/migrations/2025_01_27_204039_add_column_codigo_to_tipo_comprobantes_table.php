@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_comprobantes', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->timestamps();
+        Schema::table('tipo_comprobantes', function (Blueprint $table) {
+            $table->string('codigo')->unique()->after('nombre');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_comprobantes');
+        Schema::table('tipo_comprobantes', function (Blueprint $table) {
+            $table->dropColumn('codigo');
+        });
     }
 };
