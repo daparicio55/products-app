@@ -11,9 +11,12 @@ class Cliente extends Model
         'nombre',
         'apellido_paterno',
         'apellido_materno',
-        'tipo_documento',
+        'tipo_documento_id',
         'direccion',
         'telefono',
         'email'
     ];
+    public function tipoDocumento(){
+        return $this->belongsTo(TipoDocumento::class,'tipo_documento_id','id');
+    }
 }

@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'perudevtoken' => env('PERUDEV_TOKEN'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

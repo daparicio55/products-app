@@ -29,7 +29,7 @@ class UpdateClienteRequest extends FormRequest
             'numero_documento' => [
                 'required',
                 Rule::unique('clientes', 'numero_documento')->ignore($this->route('cliente'))->where(function ($query){
-                    return $query->where('tipo_documento', $this->tipo_documento)
+                    return $query->where('tipo_documento_id', $this->tipo_documento)
                     ->where('numero_documento', $this->numero_documento);
                 }),
             ],

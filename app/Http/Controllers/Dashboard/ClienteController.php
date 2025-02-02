@@ -7,6 +7,7 @@ use App\Models\Dashboard\Cliente;
 use App\Traits\ClienteTrait;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use App\Models\Dashboard\TipoDocumento;
 
 class ClienteController extends Controller
 {
@@ -22,26 +23,26 @@ class ClienteController extends Controller
     }
 
     public function store(StoreClienteRequest $request){
+        $request['tipo_documento_id'] = $request->tipo_documento;       
         Cliente::create($request->all());
-        return redirect()->route('clientes.index');;
+        return redirect()->route('dashboard.clientes.index');
     }
     
     public function edit($id){
-        
         $cliente = Cliente::find($id);
         return view('dashboard.clientes.edit', compact('cliente'));
     }
 
     public function update(UpdateClienteRequest $request, $id){
-       
+        $request['tipo_documento_id'] = $request->tipo_documento;
         $cliente = Cliente::find($id);
         $cliente->update($request->all());
-        return redirect()->route('clientes.index');
+        return redirect()->route('dashboard.clientes.index');
     }
 
     public function destroy($id){
         $cliente = Cliente::find($id);
         $cliente->delete();
-        return redirect()->route('clientes.index');
+        return redirect()->route('dashboard.clientes.index');
     }
 }

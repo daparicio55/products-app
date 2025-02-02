@@ -10,4 +10,7 @@ class TipoDocumento extends Model
         'nombre', 
         'codigo'
     ];
+    public function clientes(){
+        return $this->hasMany(Cliente::class,'tipo_documento_id','id');
+    }
 }
