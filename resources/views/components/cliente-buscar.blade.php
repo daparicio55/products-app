@@ -117,6 +117,7 @@
             if (!validarDocumento(numero, tipo)) {
                 return;
             }
+            showOverlay();
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -137,6 +138,8 @@
                 })
                 .catch(error => {
                     console.error('Error fetching JSON:', error);
+                }).finally(() => {
+                    hideOverlay();
                 });
         }
     </script>

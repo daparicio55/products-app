@@ -35,7 +35,8 @@ trait ClienteTrait
                 'apellido_paterno' => $cliente->apellido_paterno,
                 'apellido_materno' => $cliente->apellido_materno,
                 'numero_documento' => $cliente->numero_documento,
-                'tipo_documento' => $cliente->tipo_documento,
+                'tipo_documento_id' => $cliente->tipo_documento_id,
+                'tipo_documento' => $cliente->tipoDocumento->nombre,
                 'direccion' => $cliente->direccion,
                 'telefono' => $cliente->telefono,
                 'email' => $cliente->email
