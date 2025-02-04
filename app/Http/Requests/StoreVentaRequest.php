@@ -30,9 +30,15 @@ class StoreVentaRequest extends FormRequest
             'direccion' => 'required',
             'telefono' => 'required',
             'email' => 'required',
-            'metodo_pago' => 'required',
-            'tipo_comprobante' => 'required',
-            'fecha' => 'required'
+            'metodo_pago_id' => 'required',
+            'tipo_comprobante_id' => 'required',
+            'fecha' => 'required',
+            'cantidades'=>'required|array',
+            'cantidades.*'=>'required|numeric',
+            'catalogos'=>'required|array',
+            'catalogos.*'=>'required|numeric',
+            'precios'=>'required|array',
+            'precios.*'=>'required|numeric'
         ];
     }
 }

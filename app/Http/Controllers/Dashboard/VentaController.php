@@ -29,7 +29,7 @@ class VentaController extends Controller
         $pagos = MetodoPago::all();
         $comprobantes = TipoComprobante::all();
         $catalogos = $this->getCatalogosArray();
-        //return $catalogos;
+    
         return view('dashboard.ventas.create',compact('catalogos','pagos','comprobantes'));
     }
 
@@ -47,8 +47,7 @@ class VentaController extends Controller
 
 
     public function getLastNumber($request){
-        $venta = Venta::where('tipo_comprobante_id',$request->tipo_comprobante)
-        ->where('fecha',$request->fecha)
+        $venta = Venta::where('tipo_comprobante_id',$request->tipo_comprobante_id)        
         ->orderBy('numero','desc')
         ->first();
         if($venta){
@@ -59,14 +58,16 @@ class VentaController extends Controller
     }
 
     public function store(StoreVentaRequest $request){
-        //actualizamos al cliente si es necesario
+        
         try {
             DB::beginTransaction();
+            //creamo o actualizamos el cliente
             $cliente = $this->createOrUpdateCliente($request);
+            //creamos la nueva venta
             $venta = new Venta();
             $venta->cliente_id = $cliente->id;
-            $venta->metodo_pago_id = $request->metodo_pago;
-            $venta->tipo_comprobante_id = $request->tipo_comprobante;
+            $venta->metodo_pago_id = $request->metodo_pago_id;
+            $venta->tipo_comprobante_id = $request->tipo_comprobante_id;
             $venta->fecha = $request->fecha;
             $venta->user_id = Auth::id();
             $venta->numero = $this->getLastNumber($request);
@@ -82,7 +83,7 @@ class VentaController extends Controller
             DB::rollBack();
             return $th->getMessage();
         }
-        return redirect()->route('ventas.index')->with('info','Venta registrada correctamente');
+        return redirect()->route('dashboard.ventas.index')->with('info','Venta registrada correctamente');
     }
     
     public function getColletion($request){
@@ -124,6 +125,7 @@ class VentaController extends Controller
     }
 
     public function createOrUpdateCliente($request){
+        $request['tipo_documento_id'] = $request->tipo_documento;
         if($request->cliente_id == 0){
             $cliente = Cliente::create($request->all());
         }else{
@@ -135,7 +137,7 @@ class VentaController extends Controller
 
     public function destroy($id){
         Venta::find($id)->delete();
-        return redirect()->route('ventas.index');
+        return redirect()->route('dashboard.ventas.index');
     }
     
     public function show($id){

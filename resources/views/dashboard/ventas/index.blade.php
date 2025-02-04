@@ -25,7 +25,28 @@
                 </x-slot>
 
                 <x-slot name="tbody">
-
+                    @foreach ($ventas as $venta)
+                        <tr>
+                            <td>{{ Str::padLeft($venta->numero,4,'0') }}</td>
+                            <td>{{ $venta->tipoComprobante->nombre }}</td>
+                            <td>{{ $venta->metodoPago->nombre }}</td>
+                            <td>{{ date('d-m-Y',strtotime($venta->fecha)) }}</td>
+                            <td>
+                                @if($venta->cliente->tipo_documento_id == 2)
+                                    {{ $venta->cliente->nombre }}
+                                @else
+                                    {{ Str::upper($venta->cliente->apellido_paterno) }} {{ Str::upper($venta->cliente->apellido_materno) }}, {{ Str::title($venta->cliente->nombre) }}
+                                @endif
+                            </td>
+                            <td class="text-right">S/ {{ number_format($venta->total,2) }}</td>
+                            <td>
+                                <x-btn-show route="dashboard.ventas.show" :id="$venta->id"/>
+                                <x-modal-delete :id="$venta->id" title="Confirmar eliminación" route="dashboard.ventas.destroy">
+                                    ¿Esta seguro que desea eliminar esta venta? Este procedimiento es irreversible.
+                                </x-modal-delete>
+                            </td>
+                        </tr>
+                    @endforeach
                 </x-slot>
             </x-data-table>
 
