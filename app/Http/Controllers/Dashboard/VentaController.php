@@ -25,11 +25,26 @@ class VentaController extends Controller
     }
 
     public function create(){
-        $catalogos = Catalogo::all();
+        
         $pagos = MetodoPago::all();
         $comprobantes = TipoComprobante::all();
+        $catalogos = $this->getCatalogosArray();
+        //return $catalogos;
         return view('dashboard.ventas.create',compact('catalogos','pagos','comprobantes'));
     }
+
+    public function getCatalogosArray(){
+        $catalogos = Catalogo::get();
+        $data = [];
+        foreach ($catalogos as $catalogo) {
+            $data[$catalogo->id] = [
+                'nombre' => $catalogo->codigo.' '.$catalogo->nombre.' '.$catalogo->descripcion.' '. $catalogo->marca->nombre.' '. $catalogo->medida->nombre,
+                'precio' => $catalogo->precio,
+            ];
+        }
+        return $data;
+    }
+
 
     public function getLastNumber($request){
         $venta = Venta::where('tipo_comprobante_id',$request->tipo_comprobante)

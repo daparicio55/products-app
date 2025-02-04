@@ -88,7 +88,6 @@
     <script>
         // a la espera del click del boton buscar
         document.getElementById('btn_buscar').addEventListener('click', function() {
-            console.log('click');
             let numero = document.getElementById('numero_documento').value;
             let tipo = document.getElementById('tipo_documento').value;
             let url = getData(tipo, numero);
@@ -113,7 +112,6 @@
 
         function getData(tipo, numero) {
             let url = getUrl(tipo, numero);
-            console.log(url);
             if (!validarDocumento(numero, tipo)) {
                 return;
             }
@@ -126,7 +124,6 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     // Aquí puedes usar los datos como necesites
                     document.getElementById('cliente_id').value = data.cliente_id;
                     document.getElementById('nombre').value = data.nombre;

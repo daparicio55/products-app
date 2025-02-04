@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatalogoCompra;
+use App\Models\Dashboard\CatalogoCompra;
 use App\Models\Dashboard\Catalogo;
 use Illuminate\Http\Request;
 
