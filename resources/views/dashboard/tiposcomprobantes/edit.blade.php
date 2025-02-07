@@ -13,12 +13,19 @@
             </div>
             <div class="card-body">
                 <div class="row">
+
                     <div class="col-sm-12 col-md-6">
                         <x-input-text label="Nombre" name="nombre" :value="$tipocomprobante->nombre"/>
                     </div>
-                    <div class="col-sm-12 col-md-6">
+
+                    <div class="col-sm-12 col-md-4">
                         <x-input-text label="Código" name="codigo" :value="$tipocomprobante->codigo"/>
                     </div>
+
+                    <div class="col-sm-12 col-md-2">
+                        <x-input-text label="letra" name="letra" :value="$tipocomprobante->letra" />
+                    </div>
+
                 </div>
             </div>
             <div class="card-footer">

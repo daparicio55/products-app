@@ -9,6 +9,7 @@ class TipoComprobante extends Model
     //
     protected $fillable = [
         'nombre',
-        'codigo'
+        'codigo',
+        'letra'
     ];
 }

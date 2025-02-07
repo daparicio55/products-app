@@ -10,9 +10,11 @@ use App\Models\Dashboard\MetodoPago;
 use App\Models\Dashboard\TipoComprobante;
 use App\Models\Dashboard\Venta;
 use App\Traits\ClienteTrait;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class VentaController extends Controller
 {
@@ -142,6 +144,75 @@ class VentaController extends Controller
     
     public function show($id){
         $venta = Venta::find($id);
-        return view('dashboard.ventas.show',compact('venta'));
+        $response = Http::post('http://greenter.local/api/login',[
+            'email' => 'jsnow@mail.com',
+            'password' => '12345678'
+        ]); 
+        $token = $response->json()['access_token'];
+        $data = [
+            "ublVersion" => "2.1",
+            "tipoOperacion" => "0101",
+            "tipoDoc" => $venta->tipoComprobante->codigo,
+            "serie" => $venta->tipoComprobante->letra.'001',
+            "correlativo" => $venta->numero,
+            "fechaEmision" => Carbon::parse($venta->created_at)->format('Y-m-d H:i:s'),
+            "formaPago" => [
+                "moneda" => "PEN",
+                "tipo" => "Contado"
+            ],
+            "tipoMoneda" => "PEN",
+            "company" => [
+                "ruc" => "20125478965",
+                "razonSocial" => "Software Produccion",
+                "nombreComercial" => "Software Produccion",
+                "address" => [
+                    "ubigueo" => "150101",
+                    "departamento" => "Amazonas",
+                    "provincia" => "Chachapoyas",
+                    "distrito" => "Chachapoyas",
+                    "urbanizacion" => "-",
+                    "direccion" => "Jr. Amazonas 120",
+                    "codLocal" => "0000"
+                ]
+            ],
+            "client" => [
+                "tipoDoc" => $venta->cliente->tipoDocumento->codigo,
+                "numDoc" => $venta->cliente->numero_documento,
+                "rznSocial" => $venta->cliente->nombre,
+            ],
+            "details" => $this->getDetails($venta),
+        ];    
+
+        //return $data;
+
+        $invoice_response = Http::withToken($token)->post('http://greenter.local/api/invoices/send',$data);     
+
+        return $invoice_response->json();
+
+        /* return view('dashboard.ventas.show',compact('venta')); */
     }
+
+    public function getDetails($venta){
+        $data = [];
+        foreach ($venta->catalogos as $catalogo) {
+            $data[] = [
+
+                "tipAfeIgv" => "20",
+                "codProducto" => $catalogo->codigo,
+                "unidad" => $catalogo->medida->codigo,
+                "cantidad" => $catalogo->pivot->cantidad,
+                "mtoValorUnitario" => $catalogo->pivot->precio,
+                "descripcion" => $catalogo->nombre .' '.$catalogo->descripcion,
+                "mtoBaseIgv" => $catalogo->pivot->precio * $catalogo->pivot->cantidad,
+                "porcentajeIgv" => $venta->igv == 0 ? "0" : "18",
+                "igv" => $venta->ivg == 0 ? "0" : ($catalogo->pivot->precio * $catalogo->pivot->cantidad)*0.18,
+                "totalImpuestos" => $venta->ivg == 0 ? "0" : ($catalogo->pivot->precio * $catalogo->pivot->cantidad)*0.18,
+                "mtoValorVenta" => $catalogo->pivot->precio * $catalogo->pivot->cantidad,
+                "mtoPrecioUnitario" => $venta->igv == 0 ? $catalogo->pivot->precio : $catalogo->pivot->precio + $venta->igv,
+
+            ];
+        }
+        return $data;
+    }
+    
 }

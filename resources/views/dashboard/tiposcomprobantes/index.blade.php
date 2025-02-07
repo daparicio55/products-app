@@ -15,6 +15,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Código</th>
+                    <th>Letra</th>
                     <th style="width: 220px">Acciones</th>
                 </x-slot>
                 <x-slot name="tbody">
@@ -23,6 +24,7 @@
                             <td>{{ $tiposcomprobante->id }}</td>
                             <td>{{ $tiposcomprobante->nombre }}</td>
                             <td>{{ $tiposcomprobante->codigo }}</td>
+                            <td>{{ $tiposcomprobante->letra }}</td>
                             <td  class="text-center">
                                 <x-btn-edit route="dashboard.tiposcomprobantes.edit" :id="$tiposcomprobante->id" text="Editar"/>
                                 <x-modal-delete route="dashboard.tiposcomprobantes.destroy" title="Confirmar Eliminacion" :id="$tiposcomprobante->id" btntext="Eliminar">
