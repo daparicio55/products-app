@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\Dashboard\CatalogoController;
 use App\Http\Controllers\Dashboard\CategoriaController;
 use App\Http\Controllers\Dashboard\ClienteController;
@@ -25,6 +26,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('index');
     })->name('dashboard');
+
+    Route::get('/configuracion',[ConfiguracionController::class,'index'])
+    ->name('configuracion.index');
+    Route::post('/configuracion',[ConfiguracionController::class,'store'])
+    ->name('configuracion.store');
+
     // rutas para las marcas
     Route::resource('/dashboard/marcas', MarcaController::class)->names('dashboard.marcas')
     ->except('show');

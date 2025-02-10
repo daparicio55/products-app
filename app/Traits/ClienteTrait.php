@@ -65,7 +65,12 @@ trait ClienteTrait
             'tipo_documento' => 'RUC',
             'direccion' => $data->resultado->direccion .' '. $data->resultado->distrito.' '. $data->resultado->provincia.' '. $data->resultado->departamento,
             'telefono' => '999999999',
-            'email' => 'sincorreo@gmail.com'
+            'email' => 'sincorreo@gmail.com',
+            'nombre_comercial' => $data->resultado->nombre_comercial,
+            'departamento' => $data->resultado->departamento,
+            'provincia' => $data->resultado->provincia,
+            'distrito' => $data->resultado->distrito,
+            'direccion' => $data->resultado->direccion
         ];
         return response()->json($data);
     }
