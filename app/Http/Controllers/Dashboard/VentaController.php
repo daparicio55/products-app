@@ -145,8 +145,8 @@ class VentaController extends Controller
     public function show($id){
         $venta = Venta::find($id);
         $response = Http::post('http://greenter.local/api/login',[
-            'email' => 'jsnow@mail.com',
-            'password' => '12345678'
+            'email' => auth()->user()->company_email,
+            'password' => auth()->user()->company_password
         ]); 
         $token = $response->json()['access_token'];
         $data = [
@@ -166,12 +166,12 @@ class VentaController extends Controller
                 "razonSocial" => "Software Produccion",
                 "nombreComercial" => "Software Produccion",
                 "address" => [
-                    "ubigueo" => "150101",
-                    "departamento" => "Amazonas",
-                    "provincia" => "Chachapoyas",
-                    "distrito" => "Chachapoyas",
-                    "urbanizacion" => "-",
-                    "direccion" => "Jr. Amazonas 120",
+                    "ubigueo" => auth()->user()->company_ubigeo,
+                    "departamento" => auth()->user()->company_departamento,
+                    "provincia" => auth()->user()->company_provincia,
+                    "distrito" => auth()->user()->company_distrito,
+                    "urbanizacion" => auth()->user()->company_urbanizacion,
+                    "direccion" => auth()->user()->company_direccion,
                     "codLocal" => "0000"
                 ]
             ],

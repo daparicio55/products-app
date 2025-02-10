@@ -18,7 +18,18 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Administrador',
             'email' => 'admin@mail.com',
-            'password'=> bcrypt('12345678')
+            'password'=> bcrypt('12345678'),
+            'company_email' => 'jsnow@mail.com',
+            'company_password' => '12345678',
+            'company_ruc' => '20125478965',
+            'company_razon_social' => 'Jhon Snow',
+            'company_nombre_comercial' => 'Jhon Snow',
+            'company_ubigeo' => '01001',
+            'company_direccion' => 'Jr. Amazonas 120',
+            'company_departamento' => 'AMAZONAS',
+            'company_provincia' => 'CHACHAPOYAS',
+            'company_distrito' => 'CHACHAPOYAS',
+            'company_urbanizacion' => 'YANCE'
         ]);
         $this->call(MedidaSeeder::class);
         $this->call(CategoriaSeeder::class);
@@ -28,5 +39,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ClienteSeeder::class);
         $this->call(ProveedoreSeeder::class);
         $this->call(MarcaSeeder::class);
+        $this->call(CatalogoSeeder::class);
     }
 }

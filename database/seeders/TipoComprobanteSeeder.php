@@ -17,10 +17,12 @@ class TipoComprobanteSeeder extends Seeder
             [
                 'nombre' => 'Factura',
                 'codigo' => '01',
+                'letra' => 'F'
             ],
             [
                 'nombre' => 'Boleta',
                 'codigo' => '03',
+                'letra' => 'B'
             ],
             [
                 'nombre' => 'Nota de Crédito',
@@ -47,7 +49,8 @@ class TipoComprobanteSeeder extends Seeder
             # code...
             TipoComprobante::create([
                 'nombre' => $comprobante['nombre'],
-                'codigo' => $comprobante['codigo']
+                'codigo' => $comprobante['codigo'],
+                'letra' => $comprobante['letra'] ?? null
             ]);
         }
     }
