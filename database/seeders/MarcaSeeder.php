@@ -65,6 +65,7 @@ class MarcaSeeder extends Seeder
             'Lemken',
             'BKT',
             'Trelleborg',
+            'Golden beach'
         ];
         foreach ($marcas as $key => $marca) {
             Marca::create([

@@ -47,6 +47,7 @@ class CategoriaSeeder extends Seeder
             'Motores y Bombas',
             'Equipos de Siembra',
             'Paneles Solares y Generadores',
+            'Cigarrillos'
         ];
         foreach ($categorias as $key => $categoria) {
             # code...
