@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\MetodoPagoController;
 use App\Http\Controllers\Dashboard\ProveedoreController;
 use App\Http\Controllers\Dashboard\TipoComprobanteController;
 use App\Http\Controllers\Dashboard\VentaController;
+use App\Http\Controllers\Dashboard\VentaReporteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -65,9 +66,12 @@ Route::middleware([
     /* rutas para las ventas */
     Route::resource('/dashboard/ventas',VentaController::class)->names('dashboard.ventas')
     ->except(['edit','update']);
-    /* rutas para reportes */
+    /* rutas para reportes  de compras*/
     Route::get('/dashboard/reportes/compras',[CompraReporteController::class,'index'])
     ->name('dashboard.reportes.compras.index');
     Route::post('/dashboard/reportes/compras',[CompraReporteController::class,'get'])
     ->name('dashboard.reportes.compras.get');
+    // rutas para reportes de compras
+    Route::get('/dashboard/reportes/ventas',[VentaReporteController::class,'index'])
+    ->name('dashboard.reportes.ventas.index');
 });

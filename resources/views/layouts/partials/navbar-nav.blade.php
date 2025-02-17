@@ -78,3 +78,12 @@
         <i class="fas fa-shopping-cart mr-2"></i>Ventas
     </a>
 </x-nav-item-collapsive>
+
+<!-- Divider -->
+<x-sidebar-divider />
+{{-- Heading para Reportes --}}
+<x-sidebar-heading label="Administrar Reportes" />
+
+<x-nav-item label="Reportes de Ventas" icon="fas fa-list" route="dashboard.reportes.ventas.index" />
+
+<x-nav-item label="Reportes de Compras" icon="fas fa-list-ul" route="dashboard.reportes.compras.index" />
