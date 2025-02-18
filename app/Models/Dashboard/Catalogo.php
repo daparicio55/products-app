@@ -41,5 +41,9 @@ class Catalogo extends Model
     public function compras(){
         return $this->belongsToMany(Compra::class);
     }
-
+    public function ventas(){
+        return $this->belongsToMany(Venta::class)
+        ->withPivot('cantidad','precio')
+        ->withTimestamps();
+    }
 }

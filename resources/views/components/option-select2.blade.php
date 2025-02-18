@@ -10,7 +10,6 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            /* $('.js-example-basic-multiple').select2(); */
             $("#{{ $name }}").select2({
                 theme: 'bootstrap4',
             });
