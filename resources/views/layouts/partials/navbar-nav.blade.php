@@ -10,7 +10,31 @@
 <!-- Divider -->
 <x-sidebar-divider class="my-0" />
 <!-- Nav Item - Dashboard -->
-<x-nav-item route="dashboard" icon="fas fa-fw fa-tachometer-alt" label="Dashboard" />
+
+@role('Administrador')
+    <x-nav-item route="dashboard" icon="fas fa-fw fa-tachometer-alt" label="Dashboard" />
+@endrole
+
+@role('SystemAdministrador')
+    <x-nav-item route="administrador.dashboard.index" icon="fas fa-fw fa-tachometer-alt" label="Dashboard" />
+@endrole
+
+@hasrole('SystemAdministrador')
+    <!-- Divider -->
+    <x-sidebar-divider />
+    <x-nav-item route="administrador.empresas.index" icon="far fa-building" label="Empresas" />
+
+    <!-- Divider -->
+    <x-sidebar-divider />
+    <x-nav-item route="administrador.locales.index" icon="fas fa-store-alt" label="Locales" />
+
+    <!-- Divider -->
+    <x-sidebar-divider />
+    <x-nav-item route="administrador.usuarios.index" icon="fas fa-users" label="Usuarios" />
+@endhasrole
+
+
+
 
 <!-- Divider -->
 <x-sidebar-divider />
@@ -30,11 +54,15 @@
     <a class="collapse-item" href="{{ route('dashboard.marcas.index') }}">
         <i class="fas fa-copyright mr-2"></i>Marcas
     </a>
-    <a class="collapse-item" href="{{ route('dashboard.catalogos.index') }}">
-        <i class="fas fa-truck-loading mr-2"></i>Catálogos
-    </a>
+    @role('Administrador')
+        <a class="collapse-item" href="{{ route('dashboard.catalogos.index') }}">
+            <i class="fas fa-truck-loading mr-2"></i>Catálogos
+        </a>
+    @endrole
 
 </x-nav-item-collapsive>
+
+
 
 <!-- Divider -->
 <x-sidebar-divider />
@@ -47,10 +75,11 @@
     <a class="collapse-item" href="{{ route('dashboard.proveedores.index') }}">
         <i class="fas fa-ruler-vertical mr-2"></i>Proveedores
     </a>
-
-    <a class="collapse-item" href="{{ route('dashboard.compras.index') }}">
-        <i class="fas fa-sitemap mr-2"></i>Compras
-    </a>
+    @hasrole('Administrador')
+        <a class="collapse-item" href="{{ route('dashboard.compras.index') }}">
+            <i class="fas fa-sitemap mr-2"></i>Compras
+        </a>
+    @endhasrole
 
 </x-nav-item-collapsive>
 
@@ -73,10 +102,11 @@
     <a class="collapse-item" href="{{ route('dashboard.clientes.index') }}">
         <i class="fas fa-users mr-2"></i>Clientes
     </a>
-
-    <a class="collapse-item" href="{{ route('dashboard.ventas.index') }}">
-        <i class="fas fa-shopping-cart mr-2"></i>Ventas
-    </a>
+    @hasrole('Administrador')
+        <a class="collapse-item" href="{{ route('dashboard.ventas.index') }}">
+            <i class="fas fa-shopping-cart mr-2"></i>Ventas
+        </a>
+    @endhasrole
 </x-nav-item-collapsive>
 
 <!-- Divider -->

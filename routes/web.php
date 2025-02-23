@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Administrador\EmpresaController;
+use App\Http\Controllers\Administrador\LocaleController;
+use App\Http\Controllers\Administrador\UsuarioController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\Dashboard\CatalogoController;
 use App\Http\Controllers\Dashboard\CategoriaController;
@@ -13,10 +16,15 @@ use App\Http\Controllers\Dashboard\ProveedoreController;
 use App\Http\Controllers\Dashboard\TipoComprobanteController;
 use App\Http\Controllers\Dashboard\VentaController;
 use App\Http\Controllers\Dashboard\VentaReporteController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/administrador',function(){
+    return Redirect::route('administrador.dashboard.index');
 });
 
 Route::middleware([
@@ -26,7 +34,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('index');
-    })->name('dashboard');
+    })->name('dashboard')->can('dashboard');
 
     Route::get('/configuracion',[ConfiguracionController::class,'index'])
     ->name('configuracion.index');
@@ -82,4 +90,52 @@ Route::middleware([
     ->name('dashboard.reportes.ventas.index');
     Route::get('/dashboard/reportes/ventas/show/',[VentaReporteController::class,'show'])
     ->name('dashboard.reportes.ventas.show');
+})
+->prefix('administrador')
+->name('administrador.')
+->group(function (){
+
+    Route::get('/dashboard',function(){
+        return view('administrador.dashboard.index');
+    })
+    ->name('dashboard.index')
+    ->can('administrador.dashboard.index');
+
+    //rutas para gestionar las empresas
+
+    Route::get('/empresas',[EmpresaController::class,'index'])
+    ->name('empresas.index')
+    ->can('administrador.empresas.index');
+
+    Route::get('/empresas/create',[EmpresaController::class,'create'])
+    ->name('empresas.create')
+    ->can('administrador.empresas.create');
+    Route::post('/empresas',[EmpresaController::class,'store'])
+    ->name('empresas.store')
+    ->can('administrador.empresas.create');
+
+    Route::get('/empresas/edit/{empresa}',[EmpresaController::class,'edit'])
+    ->name('empresas.edit')
+    ->can('administrador.empresas.edit');
+    Route::put('/empresas/{empresa}',[EmpresaController::class,'update'])
+    ->name('empresas.update')
+    ->can('administrador.empresas.update');
+    
+    Route::delete('/empresas/{empresa}',[EmpresaController::class,'destroy'])
+    ->name('empresas.destroy')
+    ->can('administrador.empresas.destroy');
+
+    //rutas para gestionar los locales
+
+    Route::get('/locales',[LocaleController::class,'index'])
+    ->name('locales.index')
+    ->can('administrador.locales.index');
+
+    //rutas para gestionar los usuarios
+
+    Route::get('/usuarios',[UsuarioController::class,'index'])
+    ->name('usuarios.index')
+    ->can('administrador.usuarios.index');
+
+
 });
