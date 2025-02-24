@@ -114,7 +114,7 @@ Route::middleware([
     ->name('empresas.store')
     ->can('administrador.empresas.create');
 
-    Route::get('/empresas/edit/{empresa}',[EmpresaController::class,'edit'])
+    Route::get('/empresas/{empresa}/edit',[EmpresaController::class,'edit'])
     ->name('empresas.edit')
     ->can('administrador.empresas.edit');
     Route::put('/empresas/{empresa}',[EmpresaController::class,'update'])
@@ -130,6 +130,24 @@ Route::middleware([
     Route::get('/locales',[LocaleController::class,'index'])
     ->name('locales.index')
     ->can('administrador.locales.index');
+
+    Route::get('/locales/create',[LocaleController::class,'create'])
+    ->name('locales.create')
+    ->can('administrador.locales.create');
+    Route::post('/locales',[LocaleController::class,'store'])
+    ->name('locales.store')
+    ->can('administrador.locales.store');
+
+    Route::get('/locales/{locale}/edit',[LocaleController::class,'edit'])
+    ->name('locales.edit')
+    ->can('administrador.locales.edit');
+    Route::put('/locales',[LocaleController::class,'update'])
+    ->name('locales.update')
+    ->can('administrador.locales.update');
+
+    Route::delete('/locales/{locale}',[LocaleController::class,'destroy'])
+    ->name('locales.destroy')
+    ->can('administrador.locales.destroy');
 
     //rutas para gestionar los usuarios
 

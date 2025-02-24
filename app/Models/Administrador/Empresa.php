@@ -20,4 +20,8 @@ class Empresa extends Model
         'company_direccion',
         'company_ubigeo'
     ];
+
+    public function locales(){
+        return $this->hasMany(Locale::class);
+    }
 }
