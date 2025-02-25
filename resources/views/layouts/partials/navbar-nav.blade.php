@@ -30,7 +30,7 @@
 
     <!-- Divider -->
     <x-sidebar-divider />
-    <x-nav-item route="administrador.usuarios.index" icon="fas fa-users" label="Usuarios" />
+    <x-nav-item route="administrador.users.index" icon="fas fa-users" label="Usuarios" />
 @endhasrole
 
 

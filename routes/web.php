@@ -141,7 +141,7 @@ Route::middleware([
     Route::get('/locales/{locale}/edit',[LocaleController::class,'edit'])
     ->name('locales.edit')
     ->can('administrador.locales.edit');
-    Route::put('/locales',[LocaleController::class,'update'])
+    Route::put('/locales/{locale}',[LocaleController::class,'update'])
     ->name('locales.update')
     ->can('administrador.locales.update');
 
@@ -152,8 +152,29 @@ Route::middleware([
     //rutas para gestionar los usuarios
 
     Route::get('/usuarios',[UsuarioController::class,'index'])
-    ->name('usuarios.index')
-    ->can('administrador.usuarios.index');
+    ->name('users.index')
+    ->can('administrador.users.index');
 
+    Route::get('/usuarios/create',[UsuarioController::class,'create'])
+    ->name('users.create')
+    ->can('administrador.users.create');
+    Route::post('/usuarios',[UsuarioController::class,'store'])
+    ->name('users.store')
+    ->can('administrador.users.store');
+
+    Route::get('/usuarios/{user}/edit',[UsuarioController::class,'edit'])
+    ->name('users.edit')
+    ->can('administrador.users.edit');
+    Route::put('/usuarios/{user}',[UsuarioController::class,'update'])
+    ->name('users.update')
+    ->can('administrador.users.update');
+
+    Route::delete('/usuarios/{user}',[UsuarioController::class,'destroy'])
+    ->name('users.destroy')
+    ->can('administrador.users.destroy');
+
+    Route::get('/usuarios/{user}',[UsuarioController::class,'show'])
+    ->name('users.show')
+    ->can('administrador.users.show');
 
 });

@@ -39,14 +39,14 @@ class LocaleController extends Controller
     public function edit($id){
         try {
             //code...
-            $local = Locale::findOrFail($id);
+            $locale = Locale::findOrFail($id);
             $empresas = Empresa::get();
         } catch (\Throwable $th) {
             //throw $th;
             return Redirect::route('administrador.empresas.index')
             ->with('error','no se puede editar esta empresa');
         }
-        return view('administrador.locales.edit',compact('local','empresas'));
+        return view('administrador.locales.edit',compact('locale','empresas'));
     }
 
     public function update(UpdateLocaleRequest $request,$id){

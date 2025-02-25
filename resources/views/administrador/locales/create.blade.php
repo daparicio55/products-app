@@ -1,6 +1,5 @@
 @extends('layouts.main')
 @section('content')
-    
     <x-text-header label="Locales Comerciales (Nuevo)" />
     <x-btn-add-back route="administrador.locales.index" type="back" />
     <form action="{{ route('administrador.locales.store') }}" method="POST">
@@ -49,5 +48,4 @@
             </div>
         </div>
     </form>
-
 @stop

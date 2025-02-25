@@ -12,6 +12,7 @@
         <div class="card-body">
             <x-data-table id="dataTable">
                 <x-slot name="thead">
+                    <th>Empresa</th>
                     <th>Código</th>
                     <th>Nombre</th>
                     <th>Teléfono</th>
@@ -22,6 +23,7 @@
                 <x-slot name="tbody">
                     @foreach ($locales as $locale)
                         <tr>
+                            <td>{{ $locale->empresa->company_razon_social }}</td>
                             <td>{{ $locale->codigo }}</td>
                             <td>{{ $locale->nombre }}</td>
                             <td>{{ $locale->telefono }}</td>

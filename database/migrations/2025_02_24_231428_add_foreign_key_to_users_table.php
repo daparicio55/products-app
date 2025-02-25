@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('locale_id')->nullable();
+            $table->foreign('locale_id')->references('id')->on('locales');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('locale_id');
+            $table->dropForeign(['locale_id']);
         });
     }
 };

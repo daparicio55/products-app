@@ -21,8 +21,9 @@ class UpdateLocaleRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('locale');
         return [
-            'codigo'=>'required|unique:locales,codigo,'.$this->route('local').',id',
+            'codigo'=>'required|unique:locales,codigo,'.$this->route('locale').',id',
             'nombre'=>'required',
             'direccion'=>'required',
             'serie'=>'required|numeric',

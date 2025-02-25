@@ -2,6 +2,7 @@
 
 namespace App\Models\Administrador;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Locale extends Model
@@ -18,5 +19,9 @@ class Locale extends Model
     
     public function empresa(){
         return $this->belongsTo(Empresa::class);
+    }
+
+    public function users(){
+        return $this->hasMany(User::class);
     }
 }
